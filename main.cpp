@@ -1,7 +1,7 @@
 #include<iostream>
 #include<vector>
 #include<string>
-
+#include<stdlib.h>
 
 int main(){
 	std::string input;
@@ -27,12 +27,12 @@ int main(){
 	for ( std::vector<std::string>::iterator it = elements.begin(); it != elements.end(); ++it ) {
 		bool is_number = true;
 		for ( std::string::iterator cit = it->begin(); cit != it->end(); ++cit)
-			if (not isdigit(*cit))
+			if (not isdigit(*cit) && *cit !=  '-')
 				is_number = false;
 
 		if (is_number) {
 			if (wait_for_number) {
-				result += std::atoi(it->c_str());
+				result += atoi(it->c_str());
 				wait_for_number = false;
 			} else {
 				std::cout << "ERROR" << std::endl;
@@ -45,7 +45,8 @@ int main(){
 			} else {
 				if ((*it) == "+"){
 					wait_for_number = true;
-				} else {
+				} 
+				else {
 					std::cout << "ERROR" << std::endl;
 					return -1;
 				}
